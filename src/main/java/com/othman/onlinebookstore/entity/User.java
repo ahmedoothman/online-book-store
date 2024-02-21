@@ -8,6 +8,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.Data;
 
@@ -29,9 +30,9 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserRole role;
     
-    @OneToOne
+    @OneToMany(mappedBy = "user")
     private TransactionHistory transaction;
 
-    @OneToOne
+    @OneToOne(mappedBy = "user")
     private ShoppingCart shoppingCart;
 }

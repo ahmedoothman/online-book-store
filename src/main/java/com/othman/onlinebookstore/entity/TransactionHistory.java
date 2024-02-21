@@ -1,12 +1,14 @@
 package com.othman.onlinebookstore.entity;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -23,7 +25,7 @@ public class TransactionHistory {
     @ManyToMany(mappedBy = "transactions")
     private List<Book> books;
 
-    @OneToOne(mappedBy = "transaction")
+    @ManyToOne
     private User user;
 
     private Double totalPrice;

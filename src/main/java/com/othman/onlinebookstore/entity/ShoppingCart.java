@@ -22,7 +22,7 @@ public class ShoppingCart {
     private List<Book> books;
 
     
-    @OneToOne(mappedBy = "shoppingCart")
+    @OneToOne
     private User user;
 
     private Double totalPrice;
