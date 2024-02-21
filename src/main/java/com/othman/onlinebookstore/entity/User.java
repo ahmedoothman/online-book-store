@@ -1,5 +1,7 @@
 package com.othman.onlinebookstore.entity;
 
+import java.util.List;
+
 import com.othman.onlinebookstore.entity.enums.UserRole;
 
 import jakarta.persistence.Column;
@@ -31,7 +33,7 @@ public class User {
     private UserRole role;
     
     @OneToMany(mappedBy = "user")
-    private TransactionHistory transaction;
+    private List<TransactionHistory> transaction;
 
     @OneToOne(mappedBy = "user")
     private ShoppingCart shoppingCart;
