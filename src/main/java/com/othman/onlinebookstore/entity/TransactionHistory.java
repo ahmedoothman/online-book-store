@@ -3,6 +3,9 @@ package com.othman.onlinebookstore.entity;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -20,15 +23,17 @@ public class TransactionHistory {
     @GeneratedValue
     private Integer id;
 
-    @ManyToMany(mappedBy = "transactions")
+    @ManyToMany
+    @JsonIgnoreProperties("transactions")
     private List<Book> books;
 
     @ManyToOne
-    private User user;
+    @JsonManagedReference
+    private UserEntity user;
 
     private Double totalPrice;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date issuedData;
 
     

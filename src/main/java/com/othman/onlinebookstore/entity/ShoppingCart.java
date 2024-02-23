@@ -1,8 +1,11 @@
 package com.othman.onlinebookstore.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -18,13 +21,14 @@ public class ShoppingCart {
     @GeneratedValue
     private Integer id;
 
-    @ManyToMany(mappedBy = "shoppingCarts")
-    private List<Book> books;
+    @ManyToMany
+    @JsonIgnoreProperties("shoppingCart")
+    private List<Book> books = new ArrayList<>();
 
-    
     @OneToOne
-    private User user;
+    private UserEntity user;
 
+    @Column(nullable = false)
     private Double totalPrice;
 
 }

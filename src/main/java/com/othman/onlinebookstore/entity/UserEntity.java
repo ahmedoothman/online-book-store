@@ -2,6 +2,7 @@ package com.othman.onlinebookstore.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.othman.onlinebookstore.entity.enums.UserRole;
 
 import jakarta.persistence.Column;
@@ -12,11 +13,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
 @Data
-public class User {
+@Table(name="users")
+public class UserEntity {
     
     @Id
     @GeneratedValue
@@ -24,8 +27,8 @@ public class User {
 
     @Column(nullable = false)
     private String name;
-    @Column(nullable = false)
-    private String email;
+    @Column(nullable = false , unique = true)
+    private String email; // candidate key
     @Column(nullable = false)
     private String password;
     
@@ -33,8 +36,10 @@ public class User {
     private UserRole role;
     
     @OneToMany(mappedBy = "user")
+    @JsonBackReference
     private List<TransactionHistory> transaction;
 
     @OneToOne(mappedBy = "user")
+    @JsonBackReference
     private ShoppingCart shoppingCart;
 }
