@@ -10,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -22,7 +23,7 @@ import lombok.Data;
 public class UserEntity {
     
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(nullable = false)
@@ -38,8 +39,4 @@ public class UserEntity {
     @OneToMany(mappedBy = "user")
     @JsonBackReference
     private List<TransactionHistory> transaction;
-
-    @OneToOne(mappedBy = "user")
-    @JsonBackReference
-    private ShoppingCart shoppingCart;
 }

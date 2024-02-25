@@ -37,9 +37,6 @@ public class Book {
     @JsonIgnore
     private List<TransactionHistory> transactions;
 
-    @ManyToMany(mappedBy = "books")
-    @JsonIgnore
-    private List<ShoppingCart> shoppingCarts;
 
 
     @Transient

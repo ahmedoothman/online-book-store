@@ -21,8 +21,9 @@ public class BookService {
         return bookRepository.findAll();
     }
 
+    
     public List<Book> getAllBooksByIds(List<Integer> bookIds ){
-        return bookRepository.findAllById(bookIds);
+        return bookRepository.findAllByIdIn(bookIds);
     }
     
     public Book getBookById(Integer id){
@@ -34,6 +35,9 @@ public class BookService {
         newBook.setPrice(bookDTO.getPrice());
         newBook.setQuantity(bookDTO.getQuantity());
         return bookRepository.save(newBook);
+    }
+    public List<Book> saveBooks(List<Book> books){
+        return bookRepository.saveAll(books);
     }
     public Book replaceBook (Integer id,BookDTO bookDTO){
         Book newBook = new Book();
