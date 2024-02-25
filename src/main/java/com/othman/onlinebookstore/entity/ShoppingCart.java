@@ -27,9 +27,6 @@ public class ShoppingCart {
     @JsonIgnoreProperties("shoppingCart")
     private List<Book> books = new ArrayList<>();
     
-    @Check(constraints = "quantity > 0")
-    private Integer quantity;
-
     @OneToOne
     private UserEntity user;
 

@@ -30,10 +30,7 @@ public class TransactionHistory {
     @ManyToMany
     @JsonIgnoreProperties("transactions")
     private List<Book> books;
-
-    @Check(constraints = "quantity > 0")
-    private Integer quantity;
-
+    
     @ManyToOne
     @JsonManagedReference
     private UserEntity user;
