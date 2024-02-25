@@ -51,7 +51,6 @@ public class TransactionService {
             }
           }
         }
-        // bookService.saveBooks(books);
         // calculate total price
         Double totalPrice = 0.0; // 5000
         for(Book book : books){

@@ -36,9 +36,6 @@ public class BookService {
         newBook.setQuantity(bookDTO.getQuantity());
         return bookRepository.save(newBook);
     }
-    public List<Book> saveBooks(List<Book> books){
-        return bookRepository.saveAll(books);
-    }
     public Book replaceBook (Integer id,BookDTO bookDTO){
         Book newBook = new Book();
        
