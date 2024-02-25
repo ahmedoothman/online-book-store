@@ -3,6 +3,8 @@ package com.othman.onlinebookstore.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.annotations.Check;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
@@ -24,6 +26,9 @@ public class ShoppingCart {
     @ManyToMany
     @JsonIgnoreProperties("shoppingCart")
     private List<Book> books = new ArrayList<>();
+    
+    @Check(constraints = "quantity > 0")
+    private Integer quantity;
 
     @OneToOne
     private UserEntity user;
