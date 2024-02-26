@@ -20,7 +20,6 @@ public class UserService {
 
     // Method : Create User
     public UserEntity createUser(UserDTO userDTO){
-      
         UserEntity user = new UserEntity();
         user.setName(userDTO.getName());
         user.setEmail(userDTO.getEmail());
