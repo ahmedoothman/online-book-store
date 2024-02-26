@@ -3,6 +3,7 @@ package com.othman.onlinebookstore.entity;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.othman.onlinebookstore.entity.enums.UserRole;
 
 import jakarta.persistence.Column;
@@ -30,7 +31,9 @@ public class UserEntity {
     private String name;
     @Column(nullable = false , unique = true)
     private String email; // candidate key
+
     @Column(nullable = false)
+    @JsonIgnore
     private String password;
     
     @Enumerated(EnumType.STRING)

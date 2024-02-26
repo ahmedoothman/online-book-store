@@ -34,6 +34,10 @@ public class TransactionController {
     public ResponseEntity<TransactionHistory> getOne(@PathVariable Integer id){
         return ResponseEntity.ok(transactionService.getTransactionById(id));
     }
+    @GetMapping("/user/{id}")
+    public ResponseEntity<List<TransactionHistory>> getUser(@PathVariable Integer id){
+        return ResponseEntity.ok(transactionService.getTransactionByUserId(id));
+    }
     
     @PostMapping
     public ResponseEntity<TransactionHistory> createOne(@RequestBody TransactionDTO transactionDTO ){
