@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.othman.onlinebookstore.entity.enums.UserRole;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -13,6 +13,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -33,12 +34,12 @@ public class UserEntity {
     private String email; // candidate key
 
     @Column(nullable = false)
-    @JsonIgnore
+    // @JsonIgnore
     private String password;
     
-    @Enumerated(EnumType.STRING)
-    private UserRole role;
-    
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Role> roles;
+
     @OneToMany(mappedBy = "user")
     @JsonBackReference
     private List<TransactionHistory> transaction;

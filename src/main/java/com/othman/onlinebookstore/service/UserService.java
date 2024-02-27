@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import com.othman.onlinebookstore.DTO.UserDTO;
 import com.othman.onlinebookstore.entity.UserEntity;
-import com.othman.onlinebookstore.entity.enums.UserRole;
 import com.othman.onlinebookstore.exception.UserNotFoundException;
 import com.othman.onlinebookstore.repository.UserRepository;
 
@@ -24,7 +23,6 @@ public class UserService {
         user.setName(userDTO.getName());
         user.setEmail(userDTO.getEmail());
         user.setPassword(userDTO.getPassword()); // hashed password
-        user.setRole(UserRole.ADMIN);
         return userRepository.save(user);
     }
 
@@ -34,5 +32,17 @@ public class UserService {
 
     public List<UserEntity> getAllUsers(){
         return userRepository.findAll();
+    }
+
+    public UserEntity getUserByEmail(String email){
+        return userRepository.findUserByEmail(email).orElse(null);
+    }
+
+    public boolean existsByEmail(String email){
+        return userRepository.existsByEmail(email);
+    }
+
+    public UserEntity save(UserEntity user){
+        return userRepository.save(user);
     }
 }

@@ -1,5 +1,6 @@
 package com.othman.onlinebookstore.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.annotation.Generated;
@@ -20,7 +21,7 @@ public class TransactionBook {
     private Integer id;
     
     @ManyToOne(cascade = CascadeType.ALL)
-    @JsonIgnore
+    @JsonBackReference
     private TransactionHistory transaction;
     
     @ManyToOne(cascade = CascadeType.ALL)

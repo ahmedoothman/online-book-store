@@ -35,6 +35,7 @@ public class TransactionHistory {
     // private List<Book> books;
     
     @OneToMany(mappedBy = "transaction", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<TransactionBook> transactionBooks;
 
     @ManyToOne
