@@ -37,10 +37,6 @@ public class UserController {
         return ResponseEntity.ok(userService.getUserById(userId)); 
     }
 
-    @PostMapping
-    public ResponseEntity<UserEntity> createUser(@RequestBody UserDTO userDto){
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(userDto));
-    }
 
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleUserNotFoundException(UserNotFoundException exception) {

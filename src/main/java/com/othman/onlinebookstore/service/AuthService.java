@@ -10,9 +10,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.othman.onlinebookstore.DTO.LoginRequestDTO;
+import com.othman.onlinebookstore.DTO.LoginResponseDTO;
 import com.othman.onlinebookstore.DTO.RegisterRequestDTO;
 import com.othman.onlinebookstore.entity.Role;
 import com.othman.onlinebookstore.entity.UserEntity;
+import com.othman.onlinebookstore.security.JWTGenerator;
 
 import lombok.RequiredArgsConstructor;
 
@@ -23,7 +25,7 @@ public class AuthService {
     private final RoleService roleService;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
-
+    private final JWTGenerator jwtGenerator;
     public UserEntity register(RegisterRequestDTO registerRequestDTO){
         
         if (userService.existsByEmail(registerRequestDTO.getEmail())) {
@@ -45,9 +47,22 @@ public class AuthService {
         return userService.save(user);
     }
 
-    public String login(LoginRequestDTO loginRequestDTO){
+    // public String login(LoginRequestDTO loginRequestDTO){
+    //     Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequestDTO.getEmail(), loginRequestDTO.getPassword()));
+    //     SecurityContextHolder.getContext().setAuthentication(authentication);
+    //     return "Logged in successfuly";
+    // }
+
+    public LoginResponseDTO login(LoginRequestDTO loginRequestDTO){
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequestDTO.getEmail(), loginRequestDTO.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        return "Logged in successfuly";
+
+        String token = jwtGenerator.generateToken(authentication);
+
+        LoginResponseDTO loginResponseDTO = new LoginResponseDTO();
+        loginResponseDTO.setEmail(loginRequestDTO.getEmail());
+        loginResponseDTO.setToken(token);
+        
+        return loginResponseDTO;
     }
 }

@@ -17,15 +17,6 @@ public class UserService {
     
     private final UserRepository userRepository;
 
-    // Method : Create User
-    public UserEntity createUser(UserDTO userDTO){
-        UserEntity user = new UserEntity();
-        user.setName(userDTO.getName());
-        user.setEmail(userDTO.getEmail());
-        user.setPassword(userDTO.getPassword()); // hashed password
-        return userRepository.save(user);
-    }
-
     public UserEntity getUserById(Integer userId){
         return userRepository.findById(userId).orElseThrow(()-> new UserNotFoundException("User Not Found with that id :"+ userId));
     }
