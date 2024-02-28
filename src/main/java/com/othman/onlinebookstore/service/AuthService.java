@@ -62,7 +62,24 @@ public class AuthService {
         LoginResponseDTO loginResponseDTO = new LoginResponseDTO();
         loginResponseDTO.setEmail(loginRequestDTO.getEmail());
         loginResponseDTO.setToken(token);
-        
+
         return loginResponseDTO;
     }
+
+    //  change password
+
+    // forget password (email)
+    /* 
+     * get email
+     * generate unique code and save it in the db , generate url with unique token and save db
+     * send email to the user | code , url
+     */
+
+     // reset password (code, newPassword , newConfirmPassword)
+     /* 
+      * chcek if the code is correct
+      * check passwords matches
+      * update user password
+      */
+
 }
