@@ -26,6 +26,8 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final JWTGenerator jwtGenerator;
+    private final EmailService emailService;
+
     public UserEntity register(RegisterRequestDTO registerRequestDTO){
         
         if (userService.existsByEmail(registerRequestDTO.getEmail())) {
@@ -44,6 +46,11 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(registerRequestDTO.getPassword()));
         user.setRoles(Collections.singletonList(role)); // [{id:1,name:"USER"}]
 
+
+        // send email to the user
+        String subject = "Welcome to Online Book Store";
+        String body = "Welcome to Online Book Store, we are happy to have you with us";
+        emailService.sendEmail(user.getEmail(), subject, body);
         return userService.save(user);
     }
 
